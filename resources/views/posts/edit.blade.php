@@ -16,6 +16,11 @@
             <label for="exampleFormControlTextarea1" class="form-label">Description</label>
             <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">{{ $post->description }}</textarea>
         </div>
+        <select class="form-control" name="user_id">
+            @foreach($users as $user)
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
+            @endforeach
+        </select>
         <button type="submit" class="btn btn-success">Update</button>
     </form>
 @endsection
