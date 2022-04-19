@@ -37,9 +37,10 @@
                                 class="bi bi-eye-fill"></i> View</a>
                         <a href="{{ route('post.edit',  $post->id) }}" class="btn btn-primary"><i
                                 class="bi bi-pencil-square"></i> Edit</a>
-                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalDelete">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ModalDelete{{ $post->id }}">
                             <i class="bi bi-trash-fill"></i> Delete
                         </button>
+                        @include("layouts.modal")
                     </td>
                 </tr>
 
@@ -65,7 +66,8 @@
 
         </tbody>
     </table>
-    @include("layouts.modal")
+
+
     <div>
         {{ $posts->links() }}
     </div>
