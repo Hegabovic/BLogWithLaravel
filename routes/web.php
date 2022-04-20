@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,5 +49,5 @@ Route::put('/posts/restore/{id}',[PostController::class,'restore'])->name('post.
 
 // delete comment
 
-Route::delete('/posts/{id}',[PostController::class,'deleteComment'])->name('post.deleteComment');
-Route::put('/posts/{id}',[PostController::class,'restoreComment'])->name('post.restoreComment');
+Route::delete('/posts/{id}',[CommentController::class,'deleteComment'])->name('post.deleteComment');
+Route::put('/posts/{id}',[CommentController::class,'restoreComment'])->name('post.restoreComment');

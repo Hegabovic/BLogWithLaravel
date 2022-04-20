@@ -2,7 +2,7 @@
     <div class="modal-dialog" >
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Confirm Delete</h5>
+                <h5 class="modal-title">Confirm Delete {{ $comment->id  }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -10,11 +10,11 @@
             </div>
             <div class="modal-footer">
 
-                <form method="POST" action=>
+                <form method="POST" action="{{ route( 'post.restoreComment', $comment->id)  }}">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     @csrf
                     @method('DELETE')
-                    <button href=" " type="submit"  class="btn btn-danger">Delete</button>
+                    <button  type="submit"  class="btn btn-danger">Delete</button>
                 </form>
             </div>
         </div>

@@ -6,8 +6,6 @@
 @section('content')
 
     @foreach ($post->comments as $comment)
-
-
     @endforeach
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-center row">
@@ -41,15 +39,16 @@
                             <span> Comments </span><i class="fa fa-chevron-down servicedrop"></i></div>
                         <br>
                         <div id="collapse-1" class="collapse">
-                            @foreach($post->comments as $comment)
-                                @if ( ! $post->trashed())
+{{--                            $post->comments--}}
+                            @foreach($comments as $comment)
+                                @if ( ! $comment->trashed())
                                     <section>
                                         <div class="row">
                                             <div class="col-2 d-flex justify-content-between align-items-center">
                                                 <img class="img-fluid img-responsive rounded-circle" src="https://i.pinimg.com/564x/cb/16/bb/cb16bb284a2a80c75041c80ba63e62d3.jpg" alt="img">
                                             </div>
                                             <div class="col-10">
-                                                <h2>{{ $post->user->name }}</h2>
+                                                <h2>{{ $comment->user->name }}</h2>
                                                 <p>${{ $comment->comments }}</p>
                                             </div>
                                         </div>
@@ -65,17 +64,26 @@
                                                 @include("layouts.commentModal")
                                             </div>
                                         </div>
+                                        <br>
                                         <hr>
                                     </section>
                                 @else
-                                    <form method="post" action="">
+                                    <form method="post" action="{{ route('post.restoreComment', ['id' => $comment->id])}}">
                                         @csrf
                                         @method('put')
-                                        <button type="submit" class="btn btn-warning"><i
-                                                class="bi bi-pencil-square"></i> Restore
-                                        </button>
-                                        <input name="id" type="hidden" value="">
+                                        <div class="col-12 d-flex justify-content-between align-items-center">
+                                            <div class="col-4"></div>
+                                            <div class="col-8">
+                                            <button type="submit" class="btn btn-warning"><i
+                                                    class="bi bi-pencil-square"></i> Restore
+                                            </button>
+                                            <input name="id" type="hidden" value="{{ $comment->id }}">
+                                            </div>
+                                        </div>
+
                                     </form>
+                                    <br>
+                                    <hr>
                                 @endif
                             @endforeach
                         </div>
