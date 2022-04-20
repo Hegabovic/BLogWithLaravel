@@ -7,7 +7,6 @@
 @section('content')
 
     <div class="text-center">
-        {{--        {{ route('posts.create') }}--}}
         <a href="{{ route('post.create') }}" class="mt-4 btn btn-success"><i class="bi bi-plus-circle-fill"></i> Add
             Post</a>
     </div>
@@ -27,9 +26,9 @@
 {{--                @dd($post->user);--}}
                 <tr>
                     <td>
-                    {{ $post->id }}</th>
+                    {{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
-                    <td>{{ $post->user->name}}</td>
+                    <td>{{ $post->post_creator }}</td>
                     <td>{{ $post->created_at }}</td>
                     <td>
                         {{--                    {{ route('posts.edit', ['post' => $post['id']]) }}--}}

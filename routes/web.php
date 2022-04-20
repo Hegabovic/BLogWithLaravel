@@ -43,3 +43,9 @@ Route::put('/posts/update/{id}',[PostController::class,'update'])->name('post.up
  */
 Route::delete('/posts/delete/{id}',[PostController::class,'delete'])->name('post.delete');
 Route::put('/posts/restore/{id}',[PostController::class,'restore'])->name('post.restore');
+
+
+// delete comment
+
+Route::delete('/posts/{id}',[PostController::class,'deleteComment'])->name('post.deleteComment');
+Route::put('/posts/{id}',[PostController::class,'restoreComment'])->name('post.restoreComment');

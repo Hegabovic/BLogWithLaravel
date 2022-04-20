@@ -19,8 +19,9 @@ class CommentFactory extends Factory
     {
         return [
             'comments' =>Str::random(20),
-            'users_id'=> $this->faker->numberBetween(1,50),
-            'posts_id'=> $this->faker->numberBetween(1,50)
+            'user_id'=> $this->faker->numberBetween(1,50),
+            'post_id'=> $this->faker->numberBetween(1,50),
+            'commentable_id'=>rand(1,50)
         ];
     }
 }

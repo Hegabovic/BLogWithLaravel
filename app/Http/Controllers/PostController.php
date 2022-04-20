@@ -14,7 +14,6 @@ class PostController extends Controller
     {
 
         $posts = Post::withTrashed()->paginate(10);
-
         return view('posts.index', [
             'posts' => $posts
         ]);
@@ -46,11 +45,8 @@ class PostController extends Controller
     public function show($postID)
     {
         $post = Post::findOrFail($postID);
-        $comments = Comment::all();
-
         return view('posts.show', [
             'post' => $post,
-            'comments' =>$comments
         ]);
     }
 
@@ -67,9 +63,11 @@ class PostController extends Controller
 
     public function update(Request $request, $postID)
     {
+        $username = User::where('id',$request->user_id)->first()->name;
         Post::findOrFail($postID)->update([
             'title' => $request->title,
             'description' => $request->description,
+            'post_creator'=> $username,
         ]);
         return (redirect(route('posts.index')));
     }
