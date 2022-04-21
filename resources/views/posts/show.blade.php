@@ -49,19 +49,22 @@
                                             </div>
                                             <div class="col-10">
                                                 <h2>{{ $comment->user->name }}</h2>
-                                                <p>${{ $comment->comments }}</p>
+                                                <p>{{ $comment->comments }}</p>
                                             </div>
                                         </div>
                                         <div class="col-12 d-flex justify-content-space align-items-center ">
                                             <div class="col-4"></div>
                                             <div lass="col-8">
-                                            <a href="" class="btn btn-primary"><i
-                                                    class="bi bi-pencil-square"></i> Edit</a>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                                        data-target="#ModalEditComment{{ $comment->id }}">
+                                                    <i class="bi bi-pencil-square"></i> Edit
+                                                </button>
+                                                @include("layouts.commentEdit")
                                             <button type="button" class="btn btn-danger" data-toggle="modal"
                                                     data-target="#ModalDeleteComment{{ $comment->id }}">
                                                 <i class="bi bi-trash-fill"></i> Delete
                                             </button>
-                                                @include("layouts.commentModal")
+                                                @include("layouts.commentDelete")
                                             </div>
                                         </div>
                                         <br>
