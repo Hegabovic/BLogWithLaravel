@@ -10,6 +10,7 @@
         <a href="{{ route('post.create') }}" class="mt-4 btn btn-success"><i class="bi bi-plus-circle-fill"></i> Add
             Post</a>
     </div>
+
     <table class="table mt-4">
         <thead>
         <tr>
@@ -23,10 +24,10 @@
         <tbody>
         @foreach ( $posts as $post)
             @if ( ! $post->trashed())
-{{--                @dd($post->user);--}}
+                {{--                @dd($post->user);--}}
                 <tr>
                     <td>
-                    {{ $post->id }}</td>
+                        {{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->post_creator }}</td>
                     <td>{{ $post->created_at }}</td>
@@ -55,7 +56,7 @@
                         <form method="post" action="{{ route('post.restore', ['id' => $post->id])}}">
                             @csrf
                             @method('put')
-                        <button type="submit"  class="btn btn-warning"><i class="bi bi-pencil-square"></i> Restore</button>
+                            <button type="submit"  class="btn btn-warning"><i class="bi bi-pencil-square"></i> Restore</button>
                             <input name="id" type="hidden" value="{{ $post->id }}">
                         </form>
                     </td>
@@ -70,4 +71,7 @@
     <div>
         {{ $posts->links() }}
     </div>
+
+
+
 @endsection

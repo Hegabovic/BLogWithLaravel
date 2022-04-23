@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+
     <form method="POST" action={{ route('post.store') }}>
         @csrf
         <div class="mb-3">

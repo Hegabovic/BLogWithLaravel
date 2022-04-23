@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
@@ -27,9 +29,8 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-//        dd($request->all());
         $title = $request->title;
         $description = $request->description;
         $use_id = $request->user_id;
@@ -63,7 +64,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function update(Request $request, $postID)
+    public function update(UpdatePostRequest $request, $postID)
     {
         $username = User::where('id',$request->user_id)->first()->name;
         Post::findOrFail($postID)->update([
