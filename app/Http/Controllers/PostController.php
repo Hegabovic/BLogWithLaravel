@@ -24,21 +24,25 @@ class PostController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('posts.create',[
+        return view('posts.create', [
             'users' => $users
         ]);
     }
 
     public function store(StorePostRequest $request)
     {
-
-
-
+        $img = $request->file('fileUpload');
+        $extension = $img->getClientOriginalExtension();
+        $imgName = "post-" . uniqid() . ".$extension";
+        $img->move(public_path("uploads/posts"), $imgName);
+        $username = User::where('id', $request->user_id)->first()->name;
 
         Post::create([
             'user_id' => $request->user_id,
             'title' => $request->title,
             'description' => $request->description,
+            'img' => $imgName,
+            'post_creator' => $username,
         ]);
         return redirect(route('posts.index'));
     }
@@ -48,11 +52,11 @@ class PostController extends Controller
 
         $post = Post::findOrFail($postID);
         $users = User::all();
-        $comments = Comment::withTrashed()->where('commentable_id',$postID)->get();
+        $comments = Comment::withTrashed()->where('commentable_id', $postID)->get();
         return view('posts.show', [
             'post' => $post,
-            'comments' =>$comments,
-            'users'=> $users,
+            'comments' => $comments,
+            'users' => $users,
         ]);
     }
 
@@ -69,11 +73,26 @@ class PostController extends Controller
 
     public function update(UpdatePostRequest $request, $postID)
     {
-        $username = User::where('id',$request->user_id)->first()->name;
-        Post::findOrFail($postID)->update([
+        $post = Post::findOrFail($postID);
+        $imgName = $post->img;
+
+        if ($request->hasFile('fileUpload')) {
+
+            if ($imgName != null) {
+                unlink(public_path('uploads/posts/'.$imgName));
+            }
+            $img = $request->file('fileUpload');
+            $extension = $img->getClientOriginalExtension();
+            $imgName = "post-" . uniqid() . ".$extension";
+            $img->move(public_path("uploads/posts"), $imgName);
+        }
+
+        $username = User::where('id', $request->user_id)->first()->name;
+        $post->update([
             'title' => $request->title,
             'description' => $request->description,
-            'post_creator'=> $username,
+            'post_creator' => $username,
+            'img' => $imgName,
         ]);
         return (redirect(route('posts.index')));
     }

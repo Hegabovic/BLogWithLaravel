@@ -22,6 +22,9 @@
                         <div class="d-flex flex-row post-title"><span
                                 class="comments">{{ $post->description }}&nbsp;</span><span class="mr-2 dot"></span>
                         </div>
+                        <div>
+                            <img style="width: 500px;height: 300px;" src="{{ asset('uploads/posts/'.$post->img)}}" alt="image">
+                        </div>
                         <span>{{ $post->created_at->toDayDateTimeString() }}</span>
                     </div>
                 </div>
