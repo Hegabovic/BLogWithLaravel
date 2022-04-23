@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <form method="POST" action={{ route('post.store') }}>
+    <form method="POST" action="{{ route('post.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="exampleFormControlInput1" class="form-label @error('title') is-invalid @enderror">Title</label>
@@ -25,7 +25,7 @@
 
         <div class="mb-3">
             <div>
-            <label class="form-label" for="customFile @error('fileUpload') is-invalid @enderror">Default file input example</label>
+            <label class="form-label" for="customFile @error('fileUpload') is-invalid @enderror">Upload File</label>
             <input type="file" name="fileUpload" class="form-control" id="customFile" />
             </div>
             @error('fileUpload')

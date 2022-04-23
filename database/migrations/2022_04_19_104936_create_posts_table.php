@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable(false);
             $table->text('title')->nullable(false);
             $table->string('post_creator')->nullable(true);
+            $table->string('slug')->unique();
             $table->string('description')->nullable(true);
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

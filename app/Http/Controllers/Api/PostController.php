@@ -7,5 +7,9 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    //
+    public function index()
+    {
+        $posts = Post::withTrashed()->paginate(10);
+        return $posts;
+    }
 }

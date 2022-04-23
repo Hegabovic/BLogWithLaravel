@@ -31,14 +31,14 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        $title = $request->title;
-        $description = $request->description;
-        $use_id = $request->user_id;
+
+
+
 
         Post::create([
-            'user_id' => $use_id,
-            'title' => $title,
-            'description' => $description,
+            'user_id' => $request->user_id,
+            'title' => $request->title,
+            'description' => $request->description,
         ]);
         return redirect(route('posts.index'));
     }

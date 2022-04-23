@@ -11,12 +11,15 @@
             Post</a>
     </div>
 
+
+
     <table class="table mt-4">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
             <th scope="col">Posted By</th>
+            <th scope="col">Slug</th>
             <th scope="col">Created At</th>
             <th scope="col">Actions</th>
         </tr>
@@ -30,7 +33,9 @@
                         {{ $post->id }}</td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->post_creator }}</td>
+                    <td>{{ $post->slug}}</td>
                     <td>{{ $post->created_at }}</td>
+
                     <td>
                         {{--                    {{ route('posts.edit', ['post' => $post['id']]) }}--}}
                         <a href="{{ route('post.show',  $post->id) }}" class="btn btn-info"><i
