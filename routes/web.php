@@ -17,49 +17,47 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/posts',[PostController::class,'index'])->name('posts.index');
-Route::get('/posts/post/{id}',[PostController::class,'show'])->name('post.show');
+Route::get('/posts',[PostController::class,'index'])->name('posts.index')->middleware('auth');
+Route::get('/',[PostController::class,'index'])->name('posts.index')->middleware('auth');
+Route::get('/posts/post/{id}',[PostController::class,'show'])->name('post.show')->middleware('auth');
 
 /*
  *  create new Book require 2 steps:-
  *      > get  : request to display the form
  *      > post : request to preform change
 */
-Route::get('/posts/create',[PostController::class,'create'])->name('post.create');
-Route::post('/posts/store',[PostController::class,'store'])->name('post.store');
+Route::get('/posts/create',[PostController::class,'create'])->name('post.create')->middleware('auth');
+Route::post('/posts/store',[PostController::class,'store'])->name('post.store')->middleware('auth');
 /*
  * edit on an existing book require 2 steps :-
  *      > get  : request to display the form to edit
  *      > post : request to preform the update on form
  */
-Route::get('/posts/edit/{id}',[PostController::class,'edit'])->name('post.edit');
-Route::put('/posts/update/{id}',[PostController::class,'update'])->name('post.update');
+Route::get('/posts/edit/{id}',[PostController::class,'edit'])->name('post.edit')->middleware('auth');
+Route::put('/posts/update/{id}',[PostController::class,'update'])->name('post.update')->middleware('auth');
 
 /*
  * delete an existing record :-
  *
  *
  */
-Route::delete('/posts/delete/{id}',[PostController::class,'delete'])->name('post.delete');
-Route::put('/posts/restore/{id}',[PostController::class,'restore'])->name('post.restore');
+Route::delete('/posts/delete/{id}',[PostController::class,'delete'])->name('post.delete')->middleware('auth');
+Route::put('/posts/restore/{id}',[PostController::class,'restore'])->name('post.restore')->middleware('auth');
 
 
 // delete comment
 
-Route::delete('/posts/{id}',[CommentController::class,'deleteComment'])->name('post.deleteComment');
-Route::put('/posts/{id}',[CommentController::class,'restoreComment'])->name('post.restoreComment');
+Route::delete('/posts/{id}',[CommentController::class,'deleteComment'])->name('post.deleteComment')->middleware('auth');
+Route::put('/posts/{id}',[CommentController::class,'restoreComment'])->name('post.restoreComment')->middleware('auth');
 
 // edit comment
-Route::get('/posts/editComment/{id}',[CommentController::class,'editComment'])->name('post.editComment');
-Route::put('/posts/updateComment/{id}',[CommentController::class,'updateComment'])->name('post.updateComment');
+Route::get('/posts/editComment/{id}',[CommentController::class,'editComment'])->name('post.editComment')->middleware('auth');
+Route::put('/posts/updateComment/{id}',[CommentController::class,'updateComment'])->name('post.updateComment')->middleware('auth');
 
 // add comment
-Route::post('/posts/comment/store',[CommentController::class,'storeComment'])->name('post.storeComment');
+Route::post('/posts/comment/store',[CommentController::class,'storeComment'])->name('post.storeComment')->middleware('auth');
 
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
