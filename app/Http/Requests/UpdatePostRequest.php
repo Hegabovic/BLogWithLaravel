@@ -28,7 +28,6 @@ class UpdatePostRequest extends FormRequest
             'title' => ['required', 'Min:3', Rule::unique('posts')->ignore($this->id)],
             'description' => ['required', 'Min:10'],
             'user_id'=>['required','exists:users,id']
-
         ];
     }
 }
