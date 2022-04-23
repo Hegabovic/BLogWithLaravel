@@ -27,10 +27,31 @@
                 </div>
 
                 <div class="coment-bottom bg-white p-2 px-4">
-                    <div class="d-flex flex-row add-comment-section mt-4 mb-4"><img
-                            class="img-fluid img-responsive rounded-circle mr-2" src="https://i.pinimg.com/564x/cb/16/bb/cb16bb284a2a80c75041c80ba63e62d3.jpg"
-                            width="38"><input type="text" class="form-control mr-3" placeholder="Add comment">
-                        <button class="btn btn-primary" type="button">Comments  </button>
+                    <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                    <img class="img-fluid img-responsive rounded-circle mr-2" src="https://i.pinimg.com/564x/cb/16/bb/cb16bb284a2a80c75041c80ba63e62d3.jpg" width="38">
+                        {{--                   Adding commoent                             --}}
+                       <div>
+                        <div class="text-center">
+                            <form method="post" action="{{ route('post.storeComment', ['id' => $post->id])}}">
+                            <button type="submit" class="mt-4 btn btn-success"><i class="bi bi-plus-circle-fill"></i> Add Comment </button>
+                                <input type="text" name="comment" class="form-control mr-3" placeholder="Add comment">
+                                @csrf
+
+                                <div class="mb-3">
+                                    <select class="form-control @error('user_id') is-invalid @enderror" name="user_id">
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('user_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </form>
+                        </div>
+
+                       </div>
+                        {{--                      end of comment                          --}}
                     </div>
                     <!-- Start of comments section  -->
                     <div class="collapsable-comment">
@@ -39,7 +60,6 @@
                             <span> Comments </span><i class="fa fa-chevron-down servicedrop"></i></div>
                         <br>
                         <div id="collapse-1" class="collapse">
-{{--                            $post->comments--}}
                             @foreach($comments as $comment)
                                 @if ( ! $comment->trashed())
                                     <section>
@@ -55,6 +75,9 @@
                                         <div class="col-12 d-flex justify-content-space align-items-center ">
                                             <div class="col-4"></div>
                                             <div lass="col-8">
+
+
+
                                                 <button type="button" class="btn btn-primary" data-toggle="modal"
                                                         data-target="#ModalEditComment{{ $comment->id }}">
                                                     <i class="bi bi-pencil-square"></i> Edit

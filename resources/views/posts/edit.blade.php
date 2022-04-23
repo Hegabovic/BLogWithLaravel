@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <form method="POST" action={{ route('post.update',$post->id) }}>
+    <form method="POST" action="{{ route('post.update',$post->id) }}" enctype="multipart/form-data" >
         @method('put')
         @csrf
         <div class="mb-3">
@@ -22,6 +22,17 @@
         @error('description')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
+
+        <div class="mb-3">
+            <div>
+                <label class="form-label" for="customFile @error('fileUpload') is-invalid @enderror">Default file input example</label>
+                <input type="file" name="fileUpload" class="form-control" id="customFile" />
+            </div>
+            @error('fileUpload')
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+        </div>
+
 <div class="mb-3">
         <select class="form-control @error('user_id') is-invalid @enderror" name="user_id">
             @foreach($users as $user)

@@ -27,7 +27,8 @@ class UpdatePostRequest extends FormRequest
         return [
             'title' => ['required', 'Min:3', Rule::unique('posts')->ignore($this->id)],
             'description' => ['required', 'Min:10'],
-            'user_id'=>['required','exists:users,id']
+            'user_id'=>['required','exists:users,id'],
+            'fileUpload'=>['required']
         ];
     }
 }

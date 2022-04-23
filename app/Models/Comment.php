@@ -11,13 +11,11 @@ class Comment extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable=[
-        'comments'
-    ];
-
-//    public function post()
-//    {
-//        return $this->belongsTo(Post::class,'posts_id');
-//    }
+        'comments',
+        'user_id',
+        'commentable_type',
+        'commentable_id',
+];
 
     public function user()
     {

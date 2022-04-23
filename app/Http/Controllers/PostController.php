@@ -45,11 +45,14 @@ class PostController extends Controller
 
     public function show($postID)
     {
+
         $post = Post::findOrFail($postID);
+        $users = User::all();
         $comments = Comment::withTrashed()->where('commentable_id',$postID)->get();
         return view('posts.show', [
             'post' => $post,
             'comments' =>$comments,
+            'users'=> $users,
         ]);
     }
 

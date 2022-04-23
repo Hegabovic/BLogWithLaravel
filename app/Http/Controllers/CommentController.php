@@ -4,15 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+
+
+    public function storeComment(Request $request)
+    {
+        $comment = new Comment(['comments' => $request->comment,'user_id' => $request->user_id,]);
+        $post = Post::find($request->id);
+        $comment = $post->comments()->save($comment);
+        return redirect()->back();
+    }
+
+
+
     public function editComment($commentID){
         $comment = Comment::findOrFail($commentID);
         return view('posts.edit', [
             'comment' => $comment,
+
             ]);
     }
 
@@ -24,8 +38,6 @@ class CommentController extends Controller
         return to_route('post.show',['id'=>$comment->commentable_id]);
 
     }
-
-
 
     public function deleteComment($commentID){
 

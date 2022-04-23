@@ -3,6 +3,7 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,3 +56,10 @@ Route::put('/posts/{id}',[CommentController::class,'restoreComment'])->name('pos
 // edit comment
 Route::get('/posts/editComment/{id}',[CommentController::class,'editComment'])->name('post.editComment');
 Route::put('/posts/updateComment/{id}',[CommentController::class,'updateComment'])->name('post.updateComment');
+
+// add comment
+Route::post('/posts/comment/store',[CommentController::class,'storeComment'])->name('post.storeComment');
+
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
