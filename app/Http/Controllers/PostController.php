@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Jobs\ProcessPodcast;
 use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
@@ -16,6 +17,7 @@ class PostController extends Controller
     {
 
         $posts = Post::withTrashed()->paginate(10);
+        ProcessPodcast::dispatch();
         return view('posts.index', [
             'posts' => $posts
         ]);
@@ -35,6 +37,7 @@ class PostController extends Controller
         $extension = $img->getClientOriginalExtension();
         $imgName = "post-" . uniqid() . ".$extension";
         $img->move(public_path("uploads/posts"), $imgName);
+
         $username = User::where('id', $request->user_id)->first()->name;
 
         Post::create([
