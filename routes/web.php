@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialMediaController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\loginWithSocialMedia\FaceBookAuthController;
+use App\Http\Controllers\loginWithSocialMedia\GitHubAuthController;
 use App\Http\Controllers\PostController;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +61,12 @@ Route::put('/posts/updateComment/{id}',[CommentController::class,'updateComment'
 
 // add comment
 Route::post('/posts/comment/store',[CommentController::class,'storeComment'])->name('post.storeComment')->middleware('auth');
+
+
+
+Route::get('social-auth/{provider}/callback',[SocialMediaController::class,'providerCallback']);
+Route::get('social-auth/{provider}',[SocialMediaController::class,'redirectToProvider'])->name('social.redirect');
+
 
 
 Auth::routes();
