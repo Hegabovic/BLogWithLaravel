@@ -56,7 +56,6 @@ class SocialMediaController extends Controller
             return redirect()->route('posts.index');
 
         }catch(\Exception $e){
-           dd($e);
             return redirect()->route('posts.index');
         }
     }

@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\Auth\SocialMediaController;
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\loginWithSocialMedia\FaceBookAuthController;
-use App\Http\Controllers\loginWithSocialMedia\GitHubAuthController;
+
 use App\Http\Controllers\PostController;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
